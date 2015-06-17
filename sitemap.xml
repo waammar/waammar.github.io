@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://yoursite.com/blog/2013/09/02/install-nginx-admin-cpanel-plugin/</loc>
+    <loc>http://waammar.github.io/blog/2013/09/02/install-nginx-admin-cpanel-plugin/</loc>
     <lastmod>2013-09-02T15:34:00+02:00</lastmod>
   </url>
   <url>
-    <loc>http://yoursite.com/</loc>
+    <loc>http://waammar.github.io/</loc>
   </url>
   <url>
-    <loc>http://yoursite.com/blog/</loc>
+    <loc>http://waammar.github.io/blog/</loc>
   </url>
   <url>
-    <loc>http://yoursite.com/blog/archives/</loc>
+    <loc>http://waammar.github.io/blog/archives/</loc>
   </url>
   <url>
-    <loc>http://yoursite.com/blog/categories/sysadmin/</loc>
+    <loc>http://waammar.github.io/blog/categories/sysadmin/</loc>
   </url>
   <url>
-    <loc>http://yoursite.com/blog/categories/nginx/</loc>
+    <loc>http://waammar.github.io/blog/categories/nginx/</loc>
   </url>
   <url>
-    <loc>http://yoursite.com/blog/categories/nginxadmin/</loc>
+    <loc>http://waammar.github.io/blog/categories/nginxadmin/</loc>
   </url>
   <url>
-    <loc>http://yoursite.com/blog/categories/cpanel/</loc>
+    <loc>http://waammar.github.io/blog/categories/cpanel/</loc>
   </url>
   <url>
-    <loc>http://yoursite.com/blog/categories/whm/</loc>
+    <loc>http://waammar.github.io/blog/categories/whm/</loc>
   </url>
   <url>
-    <loc>http://yoursite.com/blog/categories/plugin/</loc>
+    <loc>http://waammar.github.io/blog/categories/plugin/</loc>
   </url>
 </urlset>
