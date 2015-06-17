@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+    <title><![CDATA[TheCyberXP.io]]></title>
+    <link href="http://yoursite.com/atom.xml" rel="self"/>
+    <link href="http://yoursite.com/"/>
+    <updated>2015-06-17T17:22:44+02:00</updated>
+    <id>http://yoursite.com/</id>
+    <author>
+        <name><![CDATA[Waël Ammar]]></name>
+        <email><![CDATA[wa.ammar@gmail.com]]></email>
+    </author>
+    <generator uri="http://octopress.org/">Octopress</generator>
+
+    
+    <entry>
+        <title type="html"><![CDATA[Install Nginx admin cPanel plugin]]></title>
+        <link href="http://yoursite.com/blog/2013/09/02/install-nginx-admin-cpanel-plugin/"/>
+        <updated>2013-09-02T15:34:00+02:00</updated>
+        <id>http://yoursite.com/blog/2013/09/02/install-nginx-admin-cpanel-plugin</id>
+        <content type="html"><![CDATA[<p>There has been a lot of those guides but here’s another one to the collection with minor improvements.
+In this tutorial we will install step by step the Nginx admin cPanel plugin.</p>
+
+<h3>Installation for 32Bit/64Bit</h3>
+
+<p>Step 1 Install Nginx Admin</p>
+
+<pre><code>    cd /usr/local/src
+    wget http://nginxcp.com/latest/nginxadmin.tar
+    tar xf nginxadmin.tar
+    cd publicnginx
+    ./nginxinstaller install
+</code></pre>
+
+<!-- more -->
+
+
+<p>step 2 restart Apache</p>
+
+<pre><code>    /etc/init.d/httpd restart
+</code></pre>
+
+<p>or</p>
+
+<pre><code>    service httpd restart
+</code></pre>
+
+<p>step 3 Automated <em>/tmp</em> cleanup by add a cron job</p>
+
+<pre><code>    crontab -e
+    0 */1 * * * /usr/sbin/tmpwatch -am 1 /tmp/nginx_client
+</code></pre>
+
+<h3>Configuration</h3>
+
+<p>For VPS server with 1 core and 1GB memory, This is usually the default settings in Nginx Admin :</p>
+
+<pre><code>    worker_processes  2;
+    worker_connections 5120; # increase for busier servers
+    keepalive_timeout  30;
+</code></pre>
+
+<p>For dedicated server with 4 core and up to 12GB memory:</p>
+
+<pre><code>    worker_processes  4;
+    worker_connections 10240; # increase for busier servers
+    keepalive_timeout  60;
+</code></pre>
+
+<p>For suPHP add the lines:</p>
+
+<pre><code>    fastcgi_send_timeout 60;
+    fastcgi_read_timeout 60;
+    fastcgi_connect_timeout 60;
+</code></pre>
+
+<h3>Troubleshooting</h3>
+
+<h4>If you received this error in installation:</h4>
+
+<pre><code>    Traceback (most recent call last):
+    File “/usr/local/src/publicnginx/nginxinstaller2″, line 9, in ?import createvhosts
+    File “/usr/local/src/publicnginx/createvhosts.py”, line 2, in ?import yaml
+    File “/usr/lib/python2.4/site-packages/PyYAML-3.10-py2.4-linux-i686.egg/yaml/__init__.py”, line 26
+    SyntaxError: ‘yield’ not allowed in a ‘try’ block with a ‘finally’ clause
+</code></pre>
+
+<p>Try to run pythonfix script and reinstall:</p>
+
+<pre><code>    ./pythonfix
+</code></pre>
+
+<p>If for any reason “pythonfix” not working try to downgrade python manually.</p>
+
+<pre><code>    wget http://www.python.org/ftp/python/2.5.2/Python-2.5.2.tgz
+    tar fxz Python-2.5.2.tgz
+    cd Python-2.5.2
+    ./configure
+    make
+    make install
+</code></pre>
+
+<h4>If you received this error in httpd restart.</h4>
+
+<pre><code>    nginx: [emerg] bind() to xxx.xxx.47.162:80 failed (98: Address already in use)
+    nginx: [emerg] bind() to xxx.xxx.47.164:80 failed (98: Address already in use)
+    nginx: [emerg] still could not bind()
+    already running.
+</code></pre>
+
+<p>Possibly that Apache is still running on port 80.</p>
+
+<p>The solution go to:</p>
+
+<ol>
+<li>Main >> Server Configuration >> Tweak Settings in WHM the Apache non-SSL IP/port and make sure that is set to 8081.</li>
+<li>Main >> Service Configuration >> Apache Configuration >> Global Configuration save and “Rebuilt Configuration and restart Apache”.</li>
+<li>Main >> Plugins >> Nginx Admin >> Rebuild Vhosts</li>
+</ol>
+
+
+<h4>If when restart nginx it show this error:</h4>
+
+<pre><code>    # service nginx restart
+    Restarting nginx daemon: nginxRemaining processes: 1406 11903
+    Remaining processes: 1406
+    cat: /var/run/nginx.pid: No such file or directory
+    kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or      kill -l [sigspec]
+    not runningRemaining processes: 1406
+</code></pre>
+
+<p>Clear all processes under nginx run:</p>
+
+<pre><code>    killall -15 nginx
+    /etc/init.d/httpd stop
+    ipcs -s | grep nobody | perl -e 'while () { @a=split(/\s+/); print `ipcrm sem $a[1]`}'
+    /etc/init.d/httpd start
+</code></pre>
+
+<h4>If you received this error in Nginx restart.</h4>
+
+<pre><code>    Restarting nginx daemon: nginxRemaining processes: 24323.
+</code></pre>
+
+<p>Run EasyApache</p>
+
+<pre><code>    /scripts/easyapache
+</code></pre>
+]]></content>
+    </entry>
+    
+</feed>
